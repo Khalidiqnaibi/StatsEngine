@@ -17,11 +17,7 @@ class TemplateRegistry:
     def _register_defaults(self) -> None:
         """Register default core templates on engine initialization."""
         default_templates: List[Type[BaseTemplate]] = [
-            BinomialTrialTemplate,
-            # Add additional domain templates here:
-            # NormalDistributionTemplate,
-            # DiceRollTemplate,
-            # ExpectedValueTemplate,
+            BinomialTrialTemplate
         ]
         for template_cls in default_templates:
             self.register(template_cls)

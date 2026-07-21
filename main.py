@@ -26,7 +26,7 @@ def run_test():
     template_instance = engine.registry["binomial_event"]
     original_math = template_instance.solve_math
     template_instance.solve_math = lambda self, **kwargs: 1 / 0 # Force ZeroDivisionError
-    
+    payload["params"]["trials"] = 1000000
     fallback_result = engine.execute(payload)
     print(json.dumps(fallback_result, indent=2))
     
