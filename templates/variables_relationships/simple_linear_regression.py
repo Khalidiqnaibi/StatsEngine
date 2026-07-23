@@ -1,6 +1,6 @@
 from core.base_template import BaseTemplate
 import scipy.stats as stats
-from ...registry import TemplateRegistry
+from ..registry import TemplateRegistry
 
 
 class SimpleLinearRegressionTemplate(BaseTemplate):

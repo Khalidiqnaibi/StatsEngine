@@ -1,6 +1,6 @@
 from core.base_template import BaseTemplate
 import numpy as np
-from ...registry import TemplateRegistry
+from ..registry import TemplateRegistry
 
 
 class SummaryStatsTemplate(BaseTemplate):

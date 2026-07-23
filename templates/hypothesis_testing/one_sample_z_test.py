@@ -1,7 +1,7 @@
 from core.base_template import BaseTemplate
 import scipy.stats as stats
 import numpy as np
-from ...registry import TemplateRegistry
+from ..registry import TemplateRegistry
 
 
 class OneSampleZTestTemplate(BaseTemplate):

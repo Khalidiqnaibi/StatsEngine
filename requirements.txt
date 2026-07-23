@@ -2,5 +2,8 @@ numpy>=1.26,<3.0
 scipy>=1.11,<2.0
 sympy>=1.12,<2.0
 
+# --- Optional: only needed to run main.py's chart output (engine core has no plotting dependency) ---
+matplotlib>=3.8,<4.0
+
 # --- Optional MCP integration (only needed if you run StatsEngine as an MCP server) ---
 # mcp>=1.2.0
