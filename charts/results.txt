@@ -1,0 +1,221 @@
+
+======================================================================
+0. TEMPLATE CATALOG
+======================================================================
+31 templates registered across gaming, distributions, finance, and inference:
+
+  - binomial_event                   ['n', 'p', 'k']
+  - geometric_first_success          ['p', 'k']
+  - negative_binomial_event          ['r', 'p', 'k']
+  - hypergeometric_event             ['population_size', 'success_states', 'draws', 'k']
+  - poisson_event                    ['lam', 'k']
+  - poisson_at_least                 ['lam', 'k']
+  - normal_less_than                 ['mean', 'std', 'x']
+  - normal_between                   ['mean', 'std', 'lower', 'upper']
+  - exponential_wait_time            ['lam', 't']
+  - uniform_range_probability        ['low', 'high', 'lower', 'upper']
+  - card_draw_probability            ['deck_size', 'target_cards', 'draws', 'k']
+  - card_at_least_one                ['deck_size', 'target_cards', 'draws']
+  - coin_flip_exact_heads            ['n', 'p', 'k']
+  - coin_flip_consecutive_run        ['n', 'p', 'k']
+  - dice_sum_probability             ['n_dice', 'sides', 'target_sum']
+  - dice_at_least_one_value          ['n_dice', 'sides', 'target_value']
+  - roulette_single_number           ['pockets']
+  - roulette_consecutive_color       ['p', 'k']
+  - expected_value_discrete          ['outcomes', 'probabilities']
+  - gamblers_ruin_probability        ['start', 'goal', 'p']
+  - value_at_risk                    ['mean_return', 'std_return', 'confidence', 'portfolio_value']
+  - confidence_interval_mean         ['sample_mean', 'sample_std', 'n', 'confidence']
+  - confidence_interval_proportion   ['successes', 'n', 'confidence']
+  - summary_statistics               ['data']
+  - z_score                          ['x', 'mean', 'std']
+  - one_sample_t_test                ['data', 'pop_mean']
+  - one_sample_z_test                ['sample_mean', 'pop_mean', 'pop_std', 'n']
+  - two_sample_t_test                ['data_a', 'data_b']
+  - chi_square_goodness_of_fit       ['observed', 'expected']
+  - pearson_correlation              ['data_x', 'data_y']
+  - simple_linear_regression         ['data_x', 'data_y']
+
+======================================================================
+1. GAMING - Poker flush draw across turn and river
+======================================================================
+
+--- Odds of catching a flush card at least once (turn+river, 9 outs, 47 unseen) ---
+template_id: card_at_least_one
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": 0.3496762257169289,
+  "execution_time_ms": 1.0449
+}
+[chart saved -> charts/01_poker_flush_distribution.png]
+
+======================================================================
+2. DISTRIBUTIONS - Call center overload risk
+======================================================================
+
+--- P(at least 12 calls in an hour | average rate = 7/hr) ---
+template_id: poisson_at_least
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": 0.053349623151558445,
+  "execution_time_ms": 0.8288
+}
+[chart saved -> charts/02_poisson_overload.png]
+
+======================================================================
+3. FINANCE - Portfolio risk stack
+======================================================================
+
+--- 95% 1-day VaR on a $250k portfolio (mean 0.04% / day, std 1.2%) ---
+template_id: value_at_risk
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": 4834.560880854417,
+  "execution_time_ms": 0.7541
+}
+
+--- P(strategy reaches +50 units before busting) starting at 20, edge p=0.52 ---
+template_id: gamblers_ruin_probability
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": 0.8131372180301407,
+  "execution_time_ms": 0.3658
+}
+[chart saved -> charts/03_portfolio_var.png]
+
+======================================================================
+4. INFERENCE / DESCRIPTIVE - Summarize raw response-time data
+======================================================================
+
+--- Summary statistics over 10 API response-time samples (ms) ---
+template_id: summary_statistics
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": {
+    "mean": 209.3,
+    "variance": 1442.4555555555555,
+    "std_dev": 37.979672925863326,
+    "median": 196.5,
+    "min": 175.0,
+    "max": 300.0,
+    "range": 125.0,
+    "n": 10
+  },
+  "execution_time_ms": 0.7659
+}
+
+======================================================================
+5. INFERENCE / CONFIDENCE INTERVAL - True mean latency, 95% CI
+======================================================================
+
+--- 95% CI for true mean latency given the sample above ---
+template_id: confidence_interval_mean
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": {
+    "lower": 182.1309786859766,
+    "upper": 236.46902131402342,
+    "margin_of_error": 27.169021314023407
+  },
+  "execution_time_ms": 0.5575
+}
+[chart saved -> charts/05_latency_confidence_interval.png]
+
+======================================================================
+6. INFERENCE / HYPOTHESIS TESTING - Did the migration help?
+======================================================================
+
+--- Two-sample t-test: response times before vs. after migration ---
+template_id: two_sample_t_test
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": {
+    "t_statistic": 2.845145926077895,
+    "p_value": 0.017411903100080957
+  },
+  "execution_time_ms": 1.8942
+}
+
+--- Chi-square goodness of fit: are support tickets evenly split across 5 categories? ---
+template_id: chi_square_goodness_of_fit
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": {
+    "chi2_statistic": 8.95,
+    "p_value": 0.06236146613171074,
+    "df": 4
+  },
+  "execution_time_ms": 0.8545
+}
+[chart saved -> charts/06a_migration_before_after.png]
+[chart saved -> charts/06b_ticket_chi_square.png]
+
+======================================================================
+7. INFERENCE / VARIABLE RELATIONSHIPS - Ad spend vs. signups
+======================================================================
+
+--- Pearson correlation between weekly ad spend and signups ---
+template_id: pearson_correlation
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": {
+    "r": 0.990318583593162,
+    "p_value": 0.0001401410167376749
+  },
+  "execution_time_ms": 1.2155
+}
+
+--- OLS regression: predict signups at $1,500 weekly ad spend ---
+template_id: simple_linear_regression
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": {
+    "slope": 0.07028571428571428,
+    "intercept": 3.799999999999997,
+    "r_squared": 0.9807308970099667,
+    "p_value": 0.0001401410167376749,
+    "std_err": 0.004925982757019052,
+    "prediction": 109.22857142857143
+  },
+  "execution_time_ms": 1.038
+}
+[chart saved -> charts/07_adspend_regression.png]
+
+======================================================================
+8. DUAL-TRACK FALLBACK - Forcing a math failure mid-flight
+======================================================================
+
+--- Standard analytical execution ---
+template_id: binomial_event
+{
+  "status": "success",
+  "method": "analytical_math",
+  "value": 0.1550453595742519,
+  "execution_time_ms": 0.7371
+}
+
+--- Same query, math track sabotaged -> Monte Carlo fallback kicks in ---
+template_id: binomial_event
+{
+  "status": "success",
+  "method": "monte_carlo_simulation",
+  "value": 0.15518,
+  "execution_time_ms": 27.537
+}
+[chart saved -> charts/08_dual_track_comparison.png]
+
+======================================================================
+DONE
+======================================================================
+Every result above came from the same StatsEngine().execute(payload) call - gaming, distributions, finance, and full inference all share one dual-track interface.
+Charts written to: C:\Users\MSI\Documents\GitHub\StatsEngine\charts

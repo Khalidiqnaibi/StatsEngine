@@ -201,7 +201,7 @@ def run_test():
 
     # Chart A: before/after boxplot
     fig, ax = plt.subplots(figsize=(6, 4))
-    ax.boxplot([before, after], labels=["Before", "After"], patch_artist=True,
+    ax.boxplot([before, after], label=["Before", "After"], patch_artist=True,
                boxprops=dict(facecolor="#aed6f1"))
     ax.set_ylabel("Response time (ms)")
     ax.set_title("Migration impact on response times")
