@@ -1,0 +1,6 @@
+numpy>=1.26,<3.0
+scipy>=1.11,<2.0
+sympy>=1.12,<2.0
+
+# --- Optional MCP integration (only needed if you run StatsEngine as an MCP server) ---
+# mcp>=1.2.0

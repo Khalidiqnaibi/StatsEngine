@@ -10,9 +10,20 @@ class TemplateRegistry:
     Manages lookup, validation, template metadata, and dynamic registration.
     """
 
+    _instance: "TemplateRegistry" = None
+
+    def __new__(cls) -> "TemplateRegistry":
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance._initialized = False
+        return cls._instance
+
     def __init__(self) -> None:
+        if self._initialized:
+            return
         self._registry: Dict[str, Type[BaseTemplate]] = {}
         self._register_defaults()
+        self._initialized = True
 
     def _register_defaults(self) -> None:
         """Register default core templates on engine initialization."""
