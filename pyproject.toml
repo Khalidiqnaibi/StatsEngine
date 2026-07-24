@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "statsengine"
+version = "0.1.0"
+description = "Deterministic, template-driven probability & statistics engine with an analytical-math + Monte Carlo dual-track execution model."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.9"
+authors = [
+    { name = "Khalid Iqnaibi" }
+]
+keywords = ["statistics", "probability", "monte-carlo", "mcp", "data-science"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+dependencies = [
+    "numpy>=1.26,<3.0",
+    "scipy>=1.11,<2.0",
+    "sympy>=1.12,<2.0",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.2.0"]
+charts = ["matplotlib>=3.8,<4.0"]
+dev = ["pytest>=8.0", "build>=1.0", "twine>=5.0"]
+
+[project.urls]
+Homepage = "https://github.com/Khalidiqnaibi/StatsEngine"
+Repository = "https://github.com/Khalidiqnaibi/StatsEngine"
+
+[project.scripts]
+statsengine-mcp = "mcp_server.server:main"
+
+[tool.setuptools.packages.find]
+include = ["core*", "templates*", "mcp_server*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
